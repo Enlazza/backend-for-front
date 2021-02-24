@@ -1,22 +1,11 @@
-import DeviceModel from '../models/DeviceModel';
-import MeasurementModel from '../models/MeasurementModel';
-
+import axios from 'axios';
 import IDeviceRepository from './interfaces/IDeviceRepository';
-import IMeasurementAttributes from '../models/interfaces/IMeasurementAttributes';
-import IDeviceAttributes from '../models/interfaces/IDeviceAttributes';
+import config from '../../../config';
 
-const DeviceRepository: IDeviceRepository = {
-  create(device: IDeviceAttributes) {
-    return DeviceModel.create(device);
-  },
-
-  addMeasurement(deviceId: number, measurement: IMeasurementAttributes) {
-    return MeasurementModel.create({ deviceId, ...measurement });
-  },
-
-  findByMac(mac: string) {
-    return DeviceModel.findOne({ where: { mac } });
-  },
-};
-
-export default DeviceRepository;
+export default class DeviceRepository implements IDeviceRepository {
+  getAll() {
+    return axios.get(config.coreUrl + '/devices')
+      .then((response) => response.data)
+      .catch((err) => err);
+  }
+}
