@@ -1,6 +1,5 @@
-import IUser from '../../entities/interfaces/IUser';
-import IUserAttributes from '../../entities/interfaces/IUserAttributes';
+import IUser from '../../../entities/interfaces/IUser';
 
 export default interface IUserRepository {
-  create(user: IUserAttributes): Promise<IUser | Error>;
+  create(user: IUser): Promise<IUser | Error>;
 }

@@ -2,11 +2,9 @@ import IDeviceRepository from '../repositories/interfaces/IDeviceRepository';
 
 export default class DevicesService {
   private deviceRepository: IDeviceRepository;
-  private alertRepository: IAlertRepository;
 
-  constructor(deviceRepository: IDeviceRepository, alertRepository: IAlertRepository) {
+  constructor(deviceRepository: IDeviceRepository) {
     this.deviceRepository = deviceRepository;
-    this.alertRepository = alertRepository;
   }
 
   async getAllRouters() {

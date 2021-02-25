@@ -1,7 +1,7 @@
-import IUserAttributes from './IUserAttributes';
+import IPersistentObject from './IPersistentObject';
 
-export default interface IUser extends IUserAttributes {
-  id: number;
-  createdAt: Date;
-  updatedAt: Date;
+export default interface IUserAttributes extends IPersistentObject {
+  email: string;
+  password: string;
+  name: string;
 }
