@@ -1,7 +1,6 @@
-import IDeviceAttributes from './IDeviceAttributes';
+import IPersistentObject from './IPersistentObject';
 
-export default interface IDevice extends IDeviceAttributes {
-  id: number;
-  createdAt: Date;
-  updatedAt: Date;
+export default interface IDevice extends IPersistentObject {
+  mac: string;
+  name: string;
 }
