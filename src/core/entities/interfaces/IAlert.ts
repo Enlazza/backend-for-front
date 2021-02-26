@@ -8,4 +8,6 @@ export default interface IAlert extends IPersistentObject {
     subject: string;
     body: string;
     status: number;
+    device_id: number;
+    company_id: number;
 }

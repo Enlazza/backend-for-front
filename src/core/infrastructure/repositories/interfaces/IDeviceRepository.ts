@@ -1,8 +1,7 @@
 import IDevice from '../../../entities/interfaces/IDevice';
 
 export default interface IDeviceRepository {
-  getAll(): Promise<Array<IDevice> | null>;
-  getById(id: number): Promise<IDevice | null>;
+  getByUserId(id: number): Promise<Array<IDevice> | null>;
   getByMac(mac: string): Promise<IDevice | null>;
-  create(device: IDevice): Promise<IDevice | Error>
+  add(id: number, device: IDevice): Promise<IDevice | Error>
 }

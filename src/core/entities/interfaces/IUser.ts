@@ -1,7 +1,8 @@
 import IPersistentObject from './IPersistentObject';
 
 export default interface IUserAttributes extends IPersistentObject {
-  email: string;
-  password: string;
   name: string;
+  password: string;
+  email: string;
+  company_id: number;
 }

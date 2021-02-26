@@ -1,3 +1,4 @@
+import IDevice from '../../entities/interfaces/IDevice';
 import IDeviceRepository from '../repositories/interfaces/IDeviceRepository';
 
 export default class DevicesService {
@@ -7,12 +8,11 @@ export default class DevicesService {
     this.deviceRepository = deviceRepository;
   }
 
-  async getAllRouters() {
-    return this.deviceRepository.getAll();
+  async getRoutersByUserId(id: number) {
+    return this.deviceRepository.getByUserId(id);
   };
 
-  async getRouterByID(id: number) {
-    return this.deviceRepository.getById(id);
+  async add(data: IDevice) {
+    return this.deviceRepository.add(data);
   }
-
 }

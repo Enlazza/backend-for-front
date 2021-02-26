@@ -1,3 +1,4 @@
+import IAlert from '../../entities/interfaces/IAlert';
 import IAlertRepository from '../repositories/interfaces/IAlertRepository'
 
 export default class AlertsService {
@@ -30,6 +31,18 @@ export default class AlertsService {
 
   async deleteAlertById(id: number) {
     const res = this.alertRepository.deleteById(id);
+    // Aca se modifica la respuesta para que siga el contrato entre BFF y front?
+    return res
+  }
+
+  async updateAlertById(id: number, data: IAlert) {
+    const res = this.alertRepository.updateById(id, data);
+    // Aca se modifica la respuesta para que siga el contrato entre BFF y front?
+    return res
+  }
+
+  async addAlert(data: IAlert) {
+    const res = this.alertRepository.add(data);
     // Aca se modifica la respuesta para que siga el contrato entre BFF y front?
     return res
   }

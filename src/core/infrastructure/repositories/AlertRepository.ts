@@ -1,13 +1,12 @@
 import axios from 'axios';
 import IAlertRepository from './interfaces/IAlertRepository';
 import config from '../../../config';
-import IDevice from '../../entities/interfaces/IDevice'
-import IUser from '../../entities/interfaces/IUser'
+import IAlert from '../../entities/interfaces/IAlert';
 
 export default class AlertRepository implements IAlertRepository {
   getByUserId(id: number) {
     return axios
-      .get(config.coreUrl + '/user/' + id + '/alerts')
+      .get(config.coreUrl + '/alerts/by_user/' + id)
       .then((response) => response.data)
       .catch((err) => err);
   }
@@ -30,6 +29,20 @@ export default class AlertRepository implements IAlertRepository {
   deleteById(id: number) {
     return axios
       .delete(config.coreUrl + '/alerts/delete/' + id)
+      .then((response) => response.data)
+      .catch((err) => err);
+  }
+
+  updateById(id: number, data: IAlert) {
+    return axios
+      .put(config.coreUrl + '/alerts/' + id + '/edit', data)
+      .then((response) => response.data)
+      .catch((err) => err);
+  }
+
+  add(data: IAlert) {
+    return axios
+      .post(config.coreUrl + '/alerts/add', data)
       .then((response) => response.data)
       .catch((err) => err);
   }

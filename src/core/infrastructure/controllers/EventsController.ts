@@ -15,4 +15,13 @@ export default (app: Application) => {
       .then((response) => res.send(response))
       .catch((err) => res.send(err));
   });
+
+  app.get('/alerts/:alertId/events', async (req: Request, res: Response) => {
+    const alertId: number = parseInt(req.params.alertId, 10);
+
+    eventsService
+      .getEventsByAlertId(alertId)
+      .then((response) => res.send(response))
+      .catch((err) => res.send(err));
+  });
 }
