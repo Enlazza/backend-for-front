@@ -34,5 +34,5 @@ export default interface IMeasurements extends IPersistentObject {
   v14: number;
   v15: number;
   measuredAt: Date;
-  device_id: number;
+  deviceId: number;
 }

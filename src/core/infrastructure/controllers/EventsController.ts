@@ -24,4 +24,14 @@ export default (app: Application) => {
       .then((response) => res.send(response))
       .catch((err) => res.send(err));
   });
+
+  app.get('/devices/:deviceId/events/:date1/:date2', async (req: Request, res: Response) => {
+    const deviceId: number = parseInt(req.params.alertId, 10);
+
+
+    eventsService
+      .getEventsByAlertId(deviceId)
+      .then((response) => res.send(response))
+      .catch((err) => res.send(err));
+  });
 }

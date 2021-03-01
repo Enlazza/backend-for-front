@@ -4,5 +4,5 @@ export default interface IUserAttributes extends IPersistentObject {
   name: string;
   password: string;
   email: string;
-  company_id: number;
+  companyId: number;
 }

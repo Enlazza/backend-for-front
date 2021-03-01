@@ -7,11 +7,11 @@ export default (app: Application) => {
   const alertRepository = new AlertRepository();
   const alertsService = new AlertsService(alertRepository);
 
-  app.get('/users/:userId/alerts', async (req: Request, res: Response) => {
-    const userId: number = parseInt(req.params.userId, 10);
+  app.get('/users/:companyId/alerts', async (req: Request, res: Response) => {
+    const companyId: number = parseInt(req.params.companyId, 10);
 
     alertsService
-      .getAlertsByUserId(userId)
+      .getAlertsByCompanyId(companyId)
       .then((response) => res.send(response))
       .catch((err) => res.send(err));
   });
@@ -59,6 +59,15 @@ export default (app: Application) => {
 
     alertsService
       .addAlert(data)
+      .then((response) => res.send(response))
+      .catch((err) => res.send(err));
+  });
+
+  app.get('/devices/:deviceId/alerts', async (req: Request, res: Response) => {
+    const id: number = parseInt(req.params.deviceId)
+
+    alertsService
+      .getAlertsByDeviceId(id)
       .then((response) => res.send(response))
       .catch((err) => res.send(err));
   });

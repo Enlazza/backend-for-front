@@ -7,11 +7,11 @@ export default class MeasurementsService {
     this.measurementRepository = measurementRepository;
   }
 
-  async getLatestMeasurementByRouterId(id: number) {
-    this.measurementRepository.getLatestByRouterId(id);
+  async getLatestMeasurementByDeviceId(id: number) {
+    return this.measurementRepository.getLatestByDeviceId(id);
   }
 
-  async getMeasurementsByRouterIdByDates(id: number, date1: Date, date2: Date) {
-    this.measurementRepository.getByRouterIdByDates(id, date1, date2);
+  async getMeasurementsByDeviceIdByDates(id: number, date1: Date, date2: Date) {
+    return this.measurementRepository.getByDeviceIdByDates(id, date1, date2);
   }
 }

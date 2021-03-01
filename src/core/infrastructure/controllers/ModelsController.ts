@@ -1,10 +1,10 @@
 import { Application, Request, Response } from 'express';
 import ModelRepository from '../repositories/ModelRepository'
-import ModelService from '../services/ModelsService'
+import ModelsService from '../services/ModelsService'
 
 export default (app: Application) => {
   const modelRepository = new ModelRepository();
-  const modelService = new ModelsService(modelRepository);
+  const modelsService = new ModelsService(modelRepository);
 
   app.get('/models', async (req: Request, res: Response) => {
 

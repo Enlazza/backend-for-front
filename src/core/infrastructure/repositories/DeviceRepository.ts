@@ -5,9 +5,9 @@ import IDevice from '../../entities/interfaces/IDevice'
 
 export default class DeviceRepository implements IDeviceRepository {
 
-  getByUserId(id: number) {
+  getByCompanyId(id: number) {
     return axios
-      .get(config.coreUrl + '/devices/by_user/' + id)
+      .get(config.coreUrl + '/devices/by_company/' + id)
       .then((response) => response.data)
       .catch((err) => err);
   }
@@ -19,7 +19,7 @@ export default class DeviceRepository implements IDeviceRepository {
       .catch((err) => err);
   }
 
-  add(id: number, data: IDevice) {
+  add(data: IDevice) {
     return axios
       .post(config.coreUrl + '/devices/add', data)
       .then((response) => response.data)

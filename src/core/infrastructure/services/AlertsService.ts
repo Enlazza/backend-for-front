@@ -14,12 +14,8 @@ export default class AlertsService {
     contrato entre el BFF y el front
   */
 
-  async getAlertsByUserId(id: number) {
-    return this.alertRepository.getByUserId(id);
-  }
-
-  async getAlertByAlertId(id: number) {
-    return this.alertRepository.getByAlertId(id);
+  async getAlertsByCompanyId(id: number) {
+    return this.alertRepository.getByCompanyId(id);
   }
 
   async updateStatusById(id: number, status: number) {
@@ -27,6 +23,10 @@ export default class AlertsService {
     const res = this.alertRepository.updateStatusById(id, status);
     // Aca se modifica la respuesta para que siga el contrato entre BFF y front?
     return res
+  }
+
+  async getAlertByAlertId(id: number) {
+    return this.alertRepository.getByAlertId(id);
   }
 
   async deleteAlertById(id: number) {
@@ -43,6 +43,12 @@ export default class AlertsService {
 
   async addAlert(data: IAlert) {
     const res = this.alertRepository.add(data);
+    // Aca se modifica la respuesta para que siga el contrato entre BFF y front?
+    return res
+  }
+
+  async getAlertsByDeviceId(id: number) {
+    const res = this.alertRepository.getByDeviceId(id);
     // Aca se modifica la respuesta para que siga el contrato entre BFF y front?
     return res
   }

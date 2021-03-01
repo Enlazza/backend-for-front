@@ -8,8 +8,8 @@ export default class DevicesService {
     this.deviceRepository = deviceRepository;
   }
 
-  async getRoutersByUserId(id: number) {
-    return this.deviceRepository.getByUserId(id);
+  async getDevicesByCompanyId(id: number) {
+    return this.deviceRepository.getByCompanyId(id);
   };
 
   async add(data: IDevice) {
