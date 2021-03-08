@@ -3,5 +3,5 @@ import IPersistentObject from "./IPersistentObject";
 export default interface IEntry extends IPersistentObject {
   deviceId: number;
   entry: string;
-  name: string;
+  entryName: string;
 }

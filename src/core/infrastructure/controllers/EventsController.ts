@@ -6,12 +6,12 @@ export default (app: Application) => {
   const eventRepository = new EventRepository();
   const eventsService = new EventsService(eventRepository);
 
-  app.get('/users/:userId/events/:day', async (req: Request, res: Response) => {
-    const userId: number = parseInt(req.params.userId, 10);
+  app.get('/users/:companyId/latest_events/', async (req: Request, res: Response) => {
+    const companyId: number = parseInt(req.params.companyId, 10);
     const day: number = parseInt(req.params.day, 10);
 
     eventsService
-      .getEventsByUserIdAndDay(userId, day)
+      .getLatestEventsByCompanyId(companyId)
       .then((response) => res.send(response))
       .catch((err) => res.send(err));
   });
@@ -27,10 +27,16 @@ export default (app: Application) => {
 
   app.get('/devices/:deviceId/events/:date1/:date2', async (req: Request, res: Response) => {
     const deviceId: number = parseInt(req.params.alertId, 10);
+    const fromDateString: string = req.params.date1;
+    const toDatetring: string = req.params.date2;
+    const fromDateArray: Array<string> = fromDateString.split('-');
+    const toDateArray: Array<string> = toDatetring.split('-');
 
+    const fromDate = new Date(fromDateArray[0] + '-' + fromDateArray[1] + '-' + fromDateArray[2] + ' ' + fromDateArray[3] + ':' + fromDateArray[4] + ':' + fromDateArray[5]);
+    const toDate = new Date(toDateArray[0] + '-' + toDateArray[1] + '-' + toDateArray[2] + ' ' + toDateArray[3] + ':' + toDateArray[4] + ':' + toDateArray[5]);
 
     eventsService
-      .getEventsByAlertId(deviceId)
+      .getEventsByDeviceIdByDates(deviceId, fromDate, toDate)
       .then((response) => res.send(response))
       .catch((err) => res.send(err));
   });

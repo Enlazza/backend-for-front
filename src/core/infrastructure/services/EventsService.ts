@@ -7,17 +7,53 @@ export default class EventsService {
     this.eventRepository = eventRepository;
   }
 
-  /*
-  Por ahora se devuelve lo mismo que entrega el core, eventualmente se
-  debería cambiar para que lo retornado siga el formato del contrato entre el
-  BFF y el front
-  */
-
-  async getEventsByUserIdAndDay(id: number, day: number) {
-    return this.eventRepository.getByUserIdAndDay(id, day);
+  async getLatestEventsByCompanyId(id: number) {
+    const res = await this.eventRepository.getLatestByCompanyId(id);
+    if (res == null) {
+      return res;
+    }
+    else {
+      const final: any[] = [];
+      for (let i = 0; i < res.length; i++) {
+        let aux = res[i];
+        let obj = {
+          timestamp: aux.createdAt,
+          deviceId: aux.deviceId,
+          deviceName: aux.deviceName,
+          alertId: aux.alertId,
+          alertName: aux.alertName,
+          entry: aux.entry,
+        }
+        final.push(obj);
+      }
+      return final;
+    }
   }
 
   async getEventsByAlertId(id: number) {
-    return this.eventRepository.getByAlertId(id);
+    const res = await this.eventRepository.getByAlertId(id);
+    if (res == null) {
+      return res;
+    }
+    else {
+      const final: any[] = [];
+      for (let i = 0; i < res.length; i++) {
+        let aux = res[i];
+        let obj = {
+          timestamp: aux.createdAt,
+          deviceId: aux.deviceId,
+          deviceName: aux.deviceName,
+          alertId: aux.alertId,
+          alertName: aux.alertName,
+          entry: aux.entry,
+        }
+        final.push(obj);
+      }
+      return final;
+    }
+  }
+
+  async getEventsByDeviceIdByDates(id: number, date1: Date, date2: Date) {
+    return this.eventRepository.getByDeviceIdByDates(id, date1, date2);
   }
 }

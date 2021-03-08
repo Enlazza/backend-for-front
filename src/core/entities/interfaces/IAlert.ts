@@ -1,13 +1,13 @@
 import IPersistentObject from './IPersistentObject';
 
 export default interface IAlert extends IPersistentObject {
-    name: string;
+    entryId: number;
+    companyId: number;
+    deviceId: number;
     lowerbound: number;
     upperbound: number;
-    entry: string;
+    alertName: string;
     subject: string;
     body: string;
-    status: number;
-    deviceId: number;
-    companyId: number;
+    alertStatus: number;
 }

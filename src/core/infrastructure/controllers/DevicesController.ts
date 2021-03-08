@@ -16,7 +16,7 @@ export default (app: Application) => {
       .catch((err) => res.send(err));
   });
 
-  app.post('devices/add', async (req: Request, res: Response) => {
+  app.post('/devices/add', async (req: Request, res: Response) => {
     const data: IDevice = req.body.deviceData
 
     devicesService

@@ -1,7 +1,8 @@
 import IPersistentObject from './IPersistentObject';
 
 export default interface ICompany extends IPersistentObject {
-  name: string;
+  adminId: number;
+  companyName: string;
   address: string;
   rut: string;
   business: string;

@@ -1,6 +1,7 @@
 import IPersistentObject from './IPersistentObject';
 
 export default interface IMeasurements extends IPersistentObject {
+  deviceId: number;
   a0: number;
   a1: number;
   a2: number;
@@ -34,5 +35,4 @@ export default interface IMeasurements extends IPersistentObject {
   v14: number;
   v15: number;
   measuredAt: Date;
-  deviceId: number;
 }

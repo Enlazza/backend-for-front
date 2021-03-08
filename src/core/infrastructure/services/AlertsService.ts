@@ -8,43 +8,50 @@ export default class AlertsService {
     this.alertRepository = alertRepository;
   }
 
-  /*
-    En los siguientes métodos se devuelve lo mismo que entrega el core,
-    eventualmente se debería cambiar para que lo retornado siga el formato del
-    contrato entre el BFF y el front
-  */
-
   async getAlertsByCompanyId(id: number) {
-    return this.alertRepository.getByCompanyId(id);
+    const res = await this.alertRepository.getByCompanyId(id);
+    if (res == null) {
+      return res;
+    }
+    else {
+      const final: any[] = [];
+      for (let i = 0; i < res.length; i++) {
+        let aux = res[i];
+        let obj = {
+          id: aux.id,
+          name: aux.alertName,
+          deviceId: aux.deviceId,
+          deviceName: aux.deviceName,
+          entry: aux.entry,
+          description: "hola, soy una alerta",
+          status: aux.alertStatus,
+        }
+        final.push(obj);
+      }
+      return final;
+    }
   }
 
   async updateStatusById(id: number, status: number) {
     status = 1 - status;
-    const res = this.alertRepository.updateStatusById(id, status);
-    // Aca se modifica la respuesta para que siga el contrato entre BFF y front?
-    return res
+    return this.alertRepository.updateStatusById(id, status);
   }
 
   async getAlertByAlertId(id: number) {
-    return this.alertRepository.getByAlertId(id);
+    const data = this.alertRepository.getByAlertId(id);
+    const res = {};
   }
 
   async deleteAlertById(id: number) {
-    const res = this.alertRepository.deleteById(id);
-    // Aca se modifica la respuesta para que siga el contrato entre BFF y front?
-    return res
+    return this.alertRepository.deleteById(id);
   }
 
   async updateAlertById(id: number, data: IAlert) {
-    const res = this.alertRepository.updateById(id, data);
-    // Aca se modifica la respuesta para que siga el contrato entre BFF y front?
-    return res
+    return this.alertRepository.updateById(id, data);
   }
 
   async addAlert(data: IAlert) {
-    const res = this.alertRepository.add(data);
-    // Aca se modifica la respuesta para que siga el contrato entre BFF y front?
-    return res
+    return this.alertRepository.add(data);
   }
 
   async getAlertsByDeviceId(id: number) {

@@ -26,7 +26,7 @@ export default (app: Application) => {
       .catch((err) => res.send(err));
   });
 
-  app.get('alerts/info/:alertId', async (req: Request, res: Response) => {
+  app.get('/alerts/:alertId', async (req: Request, res: Response) => {
     const alertId: number = parseInt(req.params.alertId, 10);
 
     alertsService
@@ -35,7 +35,7 @@ export default (app: Application) => {
       .catch((err) => res.send(err));
   });
 
-  app.delete('/alerts/delete/:alertId', async (req: Request, res: Response) => {
+  app.delete('/alerts/:alertId/delete', async (req: Request, res: Response) => {
     const alertId: number = parseInt(req.params.alertId, 10);
 
     alertsService
@@ -44,7 +44,7 @@ export default (app: Application) => {
       .catch((err) => res.send(err));
   });
 
-  app.put('alerts/edit', async (req: Request, res: Response) => {
+  app.put('/alerts/edit', async (req: Request, res: Response) => {
     const id: number = req.body.alert_id
     const data: IAlert = req.body.alert_data
 
@@ -54,7 +54,7 @@ export default (app: Application) => {
       .catch((err) => res.send(err));
   });
 
-  app.post('alerts/add', async (req: Request, res: Response) => {
+  app.post('/alerts/add', async (req: Request, res: Response) => {
     const data: IAlert = req.body.alert_data
 
     alertsService
