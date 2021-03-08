@@ -38,8 +38,49 @@ export default class AlertsService {
   }
 
   async getAlertByAlertId(id: number) {
-    const data = this.alertRepository.getByAlertId(id);
-    const res = {};
+    const data = await this.alertRepository.getByAlertId(id);
+    if (data == null) {
+      return data;
+    }
+    else {
+      let emailStr: string = "";
+      let phoneStr: string = "";
+
+      for (let i = 0; i < data.email.length; i++){
+        if (i == 0) {
+          emailStr += data.email[i].email;
+        }
+        else{
+          emailStr += "," + data.email[i].email;
+        } 
+      }
+      for (let i = 0; i < data.phone.length; i++){
+        if (i == 0) {
+          phoneStr += data.phone[i].number;
+        }
+        else{
+          phoneStr += "," + data.phone[i].number;
+        } 
+      }
+    
+
+      const res = {
+        id: data.alertData.id,
+        entryId: data.alertData.entryId,
+        name: data.alertData.alertName,
+        lowerbound: data.alertData.lowerbound,
+        upperbound: data.alertData.upperbound,
+        entry: data.alertData.entry,
+        subject: data.alertData.subject,
+        body: data.alertData.body,
+        description: "Ima description",
+        status: data.alertData.alertStatus,
+        emails: emailStr,
+        phones: phoneStr,
+        deviceName: data.alertData.deviceName,
+      };
+      return res;
+    }
   }
 
   async deleteAlertById(id: number) {
@@ -55,8 +96,24 @@ export default class AlertsService {
   }
 
   async getAlertsByDeviceId(id: number) {
-    const res = this.alertRepository.getByDeviceId(id);
-    // Aca se modifica la respuesta para que siga el contrato entre BFF y front?
-    return res
+    const data = await this.alertRepository.getByDeviceId(id);
+    if (data == null){
+      return data;
+    }
+    else{
+      let final: Array<any> = [];
+      for (let i = 0; i < data.length; i++){
+        let aux = data[i];
+        let obj = {
+          id: aux.id,
+          name: aux.alertName,
+          entry: aux.entry,
+          description: "2 y 2 son 4, 4 y 2 son 6",
+          status: aux.alertStatus,          
+        }
+        final.push(obj);
+      }
+      return final;
+    }
   }
 }

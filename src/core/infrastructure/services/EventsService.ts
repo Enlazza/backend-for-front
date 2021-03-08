@@ -54,6 +54,26 @@ export default class EventsService {
   }
 
   async getEventsByDeviceIdByDates(id: number, date1: Date, date2: Date) {
-    return this.eventRepository.getByDeviceIdByDates(id, date1, date2);
+    let data = await this.eventRepository.getByDeviceIdByDates(id, date1, date2);
+    if (data == null){
+      return data;
+    }
+    else{
+      let final: Array<any> = [];
+      for(let i = 0; i < data.length; i++){
+        let aux = data[i];
+        let obj = {
+          timestamp: aux.createdAt,
+          alertId: aux.alertId,
+          alertName: aux.alertName,
+          entry: aux.entry,
+          description: "<<Chorizo>> - Usada Pekora",
+        }
+        final.push(obj);
+      }
+      return final;
+    }
+
+
   }
 }

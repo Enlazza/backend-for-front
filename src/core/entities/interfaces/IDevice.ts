@@ -8,4 +8,5 @@ export default interface IDevice extends IPersistentObject {
   hostname: string;
   cellphone: number;
   installationCode: string;
+  deviceStatus: number;
 }
